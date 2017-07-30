@@ -1,0 +1,11 @@
+{
+  "name": "ssnbackend",
+  "authors": [
+    "Dmitriy Delov <MrDmitriy65@mail.ru>"
+  ],
+  "description": "",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}
