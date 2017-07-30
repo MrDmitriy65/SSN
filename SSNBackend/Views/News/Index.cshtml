@@ -1,0 +1,26 @@
+﻿@model IEnumerable<SSNBackend.DatabaseModel.Models.News>
+
+@{
+    ViewBag.Title = "Все новости";
+    Layout = "_MainLayout";
+}
+
+<h2>title</h2>
+
+<table>
+    <thead>
+    <th>Id</th>
+    <th>Head</th>
+    <th>Subhead</th>
+    <th>Body</th>
+    </thead>
+    @foreach (var news in Model)
+    {
+        <tr>
+            <td>@news.Id</td>
+            <td>@news.Header</td>
+            <td>@news.Subheader</td>
+            <td>@news.Body</td>
+        </tr>
+    }
+</table>

@@ -65,7 +65,11 @@ namespace SSNBackend
                 app.UseDeveloperExceptionPage();
             }
             app.UseIdentity();
-            app.UseMvc();
+            app.UseMvc(routes =>
+                routes.MapRoute(
+                    name: "",
+                    template: "{controller=News}/{action=Index}")
+            );
 
             app.Run(async (context) => { await context.Response.WriteAsync("Hello World!"); });
         }
