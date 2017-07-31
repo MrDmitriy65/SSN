@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using SSNBackend.Business.Abstractions;
-using SSNBackend.DatabaseModel.Models;
+using SSNBackend.Business.Models;
 
 namespace SSNBackend.Controllers
 {
@@ -23,32 +24,15 @@ namespace SSNBackend.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-//            var allNews = _repository.News;
-            var fake = new List<News>()
-            {
-                new News()
+            var allNews = _repository.News.Select(
+                dbNews => new News
                 {
-                    Id = Guid.NewGuid(),
-                    Header = "Header1",
-                    Subheader = "Subheader1",
-                    Body = "Body1"
-                },
-                new News()
-                {
-                    Id = Guid.NewGuid(),
-                    Header = "Header2",
-                    Subheader = "Subheader2",
-                    Body = "Body2"
-                },
-                new News()
-                {
-                    Id = Guid.NewGuid(),
-                    Header = "Header3",
-                    Subheader = "Subheader3",
-                    Body = "Body3"
-                }
-            };
-            return View(fake);
+                    Id = dbNews.Id,
+                    Header = dbNews.Header,
+                    Subheader = dbNews.Subheader,
+                    Body = dbNews.Body
+                });
+            return View(allNews);
         }
 
         /// <summary>
@@ -65,13 +49,16 @@ namespace SSNBackend.Controllers
         /// Валидирует и добавляет новость
         /// </summary>
         /// <returns>
-        /// При успешной валидации редиректит на Index.
+        /// При успешной валидации перенаправляет на Index.
         /// Если валидация не прошла, возвращает форму
         /// </returns>
         [HttpPost]
         public IActionResult AddNews(News model)
         {
-            return View();
+            if (!ModelState.IsValid) return View();
+            
+            _repository.AddNews(model);
+            return RedirectToAction(nameof(Index));
         }
     }
 }

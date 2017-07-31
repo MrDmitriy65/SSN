@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SSNBackend.DatabaseModel.Models.News>
+﻿@model IEnumerable<News>
 
 @{
     ViewBag.Title = "Все новости";
@@ -24,3 +24,4 @@
         </tr>
     }
 </table>
+<a asp-action="AddNews">Добавить новость</a>
