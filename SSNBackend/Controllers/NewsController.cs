@@ -60,5 +60,32 @@ namespace SSNBackend.Controllers
             _repository.AddNews(model);
             return RedirectToAction(nameof(Index));
         }
+
+        /// <summary>
+        /// Выводит форму для редактирования новости
+        /// </summary>
+        /// <param name="modelId">Id новости</param>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult EditNews(Guid? modelId)
+        {
+            News news = _repository.News.FirstOrDefault(n => n.Id == modelId);
+            return View(news);
+        }
+        
+        /// <summary>
+        /// Валидирует модель. Если модель прошла валидацию
+        /// изменяет новость
+        /// </summary>
+        /// <param name="modelId">Id новости</param>
+        /// <returns></returns>
+        [HttpPost]
+        public IActionResult EditNews(News news)
+        {
+            if(!ModelState.IsValid) return View();
+            
+            _repository.EditNews(news);
+            return RedirectToAction("Index");
+        }
     }
 }

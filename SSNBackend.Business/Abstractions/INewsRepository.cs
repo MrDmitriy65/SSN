@@ -1,12 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System.Linq;
 using SSNBackend.Business.Models;
 
 namespace SSNBackend.Business.Abstractions
 {
     public interface INewsRepository
     {
-        IEnumerable<DatabaseModel.Models.News> News { get; }
+        IQueryable<News> News { get; }
 
         void AddNews(News news);
+        void EditNews(News news);
     }
 }

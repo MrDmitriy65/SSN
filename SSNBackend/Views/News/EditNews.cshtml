@@ -1,0 +1,17 @@
+﻿@model News
+
+@{
+    ViewBag.Title = "Редактирование";
+    Layout = "_MainLayout";
+}
+
+<form asp-action="EditNews" method="post">
+    <input type="hidden" asp-for="Id" />
+    <label asp-for="Header"></label>
+    <input asp-for="Header"/>
+    <label asp-for="Subheader"></label>
+    <input asp-for="Subheader"/>
+    <label asp-for="Body"></label>
+    <input asp-for="Body"/>
+    <input type="submit"/>
+</form>
