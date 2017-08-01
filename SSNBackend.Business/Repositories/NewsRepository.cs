@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using SSNBackend.Business.Abstractions;
-using SSNBackend.Business.Models;
 using SSNBackend.DatabaseModel.DataAccess;
+using SSNBackend.DatabaseModel.Models;
+using News = SSNBackend.Business.Models.News;
 
 namespace SSNBackend.Business.Repositories
 {
@@ -13,13 +14,31 @@ namespace SSNBackend.Business.Repositories
         {
         }
         
-        public IQueryable<News> News => Context.News.Select(n => new News
+        public IQueryable<DatabaseModel.Models.News> News => Context.News;
+
+        public IEnumerable<News> GetAllNews()
         {
-            Id = n.Id,
-            Header = n.Header,
-            Subheader = n.Subheader,
-            Body = n.Body
-        });
+            return News.Select(
+                n => new News
+                {
+                    Id = n.Id,
+                    Header = n.Header,
+                    Subheader = n.Subheader,
+                    Body = n.Body
+                });
+        }
+
+        public News GetNewsById(Guid id)
+        {
+            return News.Select(n => new News
+                {
+                    Id = n.Id,
+                    Header = n.Header,
+                    Subheader = n.Subheader,
+                    Body = n.Body
+                })
+                .FirstOrDefault(n => n.Id == id);
+        }
 
         public void AddNews(News news)
         {
@@ -34,15 +53,15 @@ namespace SSNBackend.Business.Repositories
             Context.SaveChanges();
         }
 
-        public void EditNews(News news)
+        public void EditNews(News newsModel)
         {
-            News theNews = News.FirstOrDefault(n => n.Id == news.Id);
-            if(theNews == null) return;
-            var dbNews  = Context.News.FirstOrDefault(n => n.Id == news.Id);
+            var dbNews = News.FirstOrDefault(n => n.Id == newsModel.Id);
+            if(dbNews == null) return;
 
-            dbNews.Header = news.Header;
-            dbNews.Subheader = news.Subheader;
-            dbNews.Body = news.Body;
+            dbNews.Header = newsModel.Header;
+            dbNews.Subheader = newsModel.Subheader;
+            dbNews.Body = newsModel.Body;
+            
             Context.News.Update(dbNews);
             Context.SaveChanges();
         }

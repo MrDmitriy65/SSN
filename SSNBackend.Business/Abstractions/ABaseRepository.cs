@@ -1,4 +1,6 @@
-﻿using SSNBackend.DatabaseModel.DataAccess;
+﻿using System;
+using SSNBackend.DatabaseModel.DataAccess;
+using SSNBackend.DatabaseModel.Models;
 
 namespace SSNBackend.Business.Abstractions
 {

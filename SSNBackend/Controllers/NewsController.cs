@@ -24,14 +24,7 @@ namespace SSNBackend.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var allNews = _repository.News.Select(
-                dbNews => new News
-                {
-                    Id = dbNews.Id,
-                    Header = dbNews.Header,
-                    Subheader = dbNews.Subheader,
-                    Body = dbNews.Body
-                });
+            var allNews = _repository.GetAllNews();
             return View(allNews);
         }
 
@@ -67,9 +60,9 @@ namespace SSNBackend.Controllers
         /// <param name="modelId">Id новости</param>
         /// <returns></returns>
         [HttpGet]
-        public IActionResult EditNews(Guid? modelId)
+        public IActionResult EditNews(Guid modelId)
         {
-            News news = _repository.News.FirstOrDefault(n => n.Id == modelId);
+            News news = _repository.GetNewsById(modelId);
             return View(news);
         }
         
@@ -77,7 +70,7 @@ namespace SSNBackend.Controllers
         /// Валидирует модель. Если модель прошла валидацию
         /// изменяет новость
         /// </summary>
-        /// <param name="modelId">Id новости</param>
+        /// <param name="news">Модель новости</param>
         /// <returns></returns>
         [HttpPost]
         public IActionResult EditNews(News news)

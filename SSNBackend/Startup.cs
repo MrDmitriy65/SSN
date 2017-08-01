@@ -60,10 +60,7 @@ namespace SSNBackend
         {
             loggerFactory.AddConsole();
 
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            app.UseDeveloperExceptionPage();
             app.UseIdentity();
             app.UseMvc(routes =>
                 routes.MapRoute(
