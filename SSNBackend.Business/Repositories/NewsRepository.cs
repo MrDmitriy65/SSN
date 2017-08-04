@@ -8,13 +8,13 @@ using News = SSNBackend.Business.Models.News;
 
 namespace SSNBackend.Business.Repositories
 {
-    public class NewsRepository:ABaseRepository, INewsRepository
+    public class NewsRepository : ABaseRepository, INewsRepository
     {
         public NewsRepository(PostgreSqlContext context) : base(context)
         {
         }
-        
-        public IQueryable<DatabaseModel.Models.News> News => Context.News;
+
+        private IQueryable<DatabaseModel.Models.News> News => Context.News;
 
         public IEnumerable<News> GetAllNews()
         {
@@ -56,12 +56,12 @@ namespace SSNBackend.Business.Repositories
         public void EditNews(News newsModel)
         {
             var dbNews = News.FirstOrDefault(n => n.Id == newsModel.Id);
-            if(dbNews == null) return;
+            if (dbNews == null) return;
 
             dbNews.Header = newsModel.Header;
             dbNews.Subheader = newsModel.Subheader;
             dbNews.Body = newsModel.Body;
-            
+
             Context.News.Update(dbNews);
             Context.SaveChanges();
         }

@@ -22,7 +22,7 @@ namespace SSNBackend.Controllers
         /// </summary>
         /// <returns>Страница с новостями</returns>
         [HttpGet]
-        public IActionResult Index()
+        public ViewResult Index()
         {
             var allNews = _repository.GetAllNews();
             return View(allNews);
@@ -49,7 +49,7 @@ namespace SSNBackend.Controllers
         public IActionResult AddNews(News model)
         {
             if (!ModelState.IsValid) return View();
-            
+
             _repository.AddNews(model);
             return RedirectToAction(nameof(Index));
         }
@@ -65,7 +65,7 @@ namespace SSNBackend.Controllers
             News news = _repository.GetNewsById(modelId);
             return View(news);
         }
-        
+
         /// <summary>
         /// Валидирует модель. Если модель прошла валидацию
         /// изменяет новость
@@ -75,10 +75,12 @@ namespace SSNBackend.Controllers
         [HttpPost]
         public IActionResult EditNews(News news)
         {
-            if(!ModelState.IsValid) return View();
-            
+            if (!ModelState.IsValid) return View();
+
             _repository.EditNews(news);
             return RedirectToAction("Index");
         }
+        
+        //TODO Добавить удаление
     }
 }

@@ -18,3 +18,5 @@ SSNBackend\.DatabaseModel/obj/
 SSNBackend\.Test/obj/
 
 SSNBackend/wwwroot/libs/
+
+SSNBackend\.Test/bin/
