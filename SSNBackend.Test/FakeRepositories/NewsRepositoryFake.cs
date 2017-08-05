@@ -65,5 +65,14 @@ namespace SSNBackend.Test.FakeRepositories
             storageNews.Subheader = newsModel.Subheader;
             storageNews.Body = newsModel.Body;
         }
+
+        public bool IsNewsExist(Guid id)
+        {
+            return true;
+        }
+
+        public void DeleteNews(Guid id)
+        {
+        }
     }
 }

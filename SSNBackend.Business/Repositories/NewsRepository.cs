@@ -16,6 +16,10 @@ namespace SSNBackend.Business.Repositories
 
         private IQueryable<DatabaseModel.Models.News> News => Context.News;
 
+        /// <summary>
+        /// Возвращает все новости из БД
+        /// </summary>
+        /// <returns>Все новости из БД</returns>
         public IEnumerable<News> GetAllNews()
         {
             return News.Select(
@@ -28,6 +32,11 @@ namespace SSNBackend.Business.Repositories
                 });
         }
 
+        /// <summary>
+        /// Возвращает новость по ее Id
+        /// </summary>
+        /// <param name="id">Id новости</param>
+        /// <returns>Новость</returns>
         public News GetNewsById(Guid id)
         {
             return News.Select(n => new News
@@ -40,6 +49,10 @@ namespace SSNBackend.Business.Repositories
                 .FirstOrDefault(n => n.Id == id);
         }
 
+        /// <summary>
+        /// Добавляет в БД новость и задает ей новый Id
+        /// </summary>
+        /// <param name="news">Новость</param>
         public void AddNews(News news)
         {
             Context.News.Add(new DatabaseModel.Models.News
@@ -53,6 +66,10 @@ namespace SSNBackend.Business.Repositories
             Context.SaveChanges();
         }
 
+        /// <summary>
+        /// Изменяет все поля новости
+        /// </summary>
+        /// <param name="newsModel">Новость</param>
         public void EditNews(News newsModel)
         {
             var dbNews = News.FirstOrDefault(n => n.Id == newsModel.Id);
@@ -66,12 +83,21 @@ namespace SSNBackend.Business.Repositories
             Context.SaveChanges();
         }
 
+        /// <summary>
+        /// Проверяет существование новости по ее Id
+        /// </summary>
+        /// <param name="id">Id новости</param>
+        /// <returns>True, если новость существует</returns>
         public bool IsNewsExist(Guid id)
         {
             var news = Context.News.FirstOrDefault(n => n.Id == id);
             return news != null;
         }
 
+        /// <summary>
+        /// Удаляет существующую новость из БД
+        /// </summary>
+        /// <param name="id">Id новости, которую нужно удалить</param>
         public void DeleteNews(Guid id)
         {
             var news = Context.News.First(n => n.Id == id);
