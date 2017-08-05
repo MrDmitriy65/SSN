@@ -17,11 +17,18 @@
     @foreach (var news in Model)
     {
         <tr>
-            <td>@news.Id</td>
             <td>@news.Header</td>
             <td>@news.Subheader</td>
             <td>@news.Body</td>
-            <td><a asp-action="EditNews" asp-route-modelId="@news.Id">Редактировать</a></td>
+            <td>
+                <a asp-action="EditNews" asp-route-modelId="@news.Id">Редактировать</a>
+            </td>
+            <td>
+                <form asp-action="DeleteNews" method="post">
+                    <input name="newsId" type="hidden" value="@news.Id"/>
+                    <button type="submit">Удалить</button>
+                </form>
+            </td>
         </tr>
     }
 </table>

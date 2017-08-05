@@ -65,5 +65,18 @@ namespace SSNBackend.Business.Repositories
             Context.News.Update(dbNews);
             Context.SaveChanges();
         }
+
+        public bool IsNewsExist(Guid id)
+        {
+            var news = Context.News.FirstOrDefault(n => n.Id == id);
+            return news != null;
+        }
+
+        public void DeleteNews(Guid id)
+        {
+            var news = Context.News.First(n => n.Id == id);
+            Context.News.Remove(news);
+            Context.SaveChanges();
+        }
     }
 }

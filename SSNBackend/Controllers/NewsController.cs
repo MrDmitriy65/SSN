@@ -48,6 +48,7 @@ namespace SSNBackend.Controllers
         [HttpPost]
         public IActionResult AddNews(News model)
         {
+            //TODO добавить нормальную валидацию
             if (!ModelState.IsValid) return View();
 
             _repository.AddNews(model);
@@ -62,6 +63,7 @@ namespace SSNBackend.Controllers
         [HttpGet]
         public IActionResult EditNews(Guid modelId)
         {
+            //TODO добавить проверку на существование
             News news = _repository.GetNewsById(modelId);
             return View(news);
         }
@@ -75,12 +77,20 @@ namespace SSNBackend.Controllers
         [HttpPost]
         public IActionResult EditNews(News news)
         {
+            //TODO добавить нормальную валидацию
             if (!ModelState.IsValid) return View();
 
             _repository.EditNews(news);
-            return RedirectToAction("Index");
+            return RedirectToAction(nameof(Index));
         }
-        
+
         //TODO Добавить удаление
+        [HttpPost]
+        public RedirectToActionResult DeleteNews(Guid newsId)
+        {
+            if(_repository.IsNewsExist(newsId))
+                _repository.DeleteNews(newsId);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

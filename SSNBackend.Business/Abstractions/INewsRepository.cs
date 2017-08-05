@@ -11,5 +11,7 @@ namespace SSNBackend.Business.Abstractions
         News GetNewsById(Guid id);
         void AddNews(News news);
         void EditNews(News newsModel);
+        bool IsNewsExist(Guid id);
+        void DeleteNews(Guid id);
     }
 }
