@@ -84,7 +84,11 @@ namespace SSNBackend.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        //TODO Добавить удаление
+        /// <summary>
+        /// Удаляет новость по ее Id
+        /// </summary>
+        /// <param name="newsId">GUID новости</param>
+        /// <returns>Перенеаправляет на Index</returns>
         [HttpPost]
         public RedirectToActionResult DeleteNews(Guid newsId)
         {

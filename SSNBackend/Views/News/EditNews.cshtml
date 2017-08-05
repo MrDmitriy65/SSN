@@ -5,13 +5,21 @@
     Layout = "_MainLayout";
 }
 
-<form asp-action="EditNews" method="post">
-    <input type="hidden" asp-for="Id" />
-    <label asp-for="Header"></label>
-    <input asp-for="Header"/>
-    <label asp-for="Subheader"></label>
-    <input asp-for="Subheader"/>
-    <label asp-for="Body"></label>
-    <input asp-for="Body"/>
-    <input type="submit"/>
-</form>
+<div class="col-md-8 col-md-offset-2">
+    <form asp-action="EditNews" method="post">
+        <div class="form-group">
+            <input type="hidden" asp-for="Id"/>
+            <label asp-for="Header"></label>
+            <input asp-for="Header"  class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label asp-for="Subheader"></label>
+            <input asp-for="Subheader" class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label asp-for="Body"></label>
+            <textarea asp-for="Body" class="form-control" rows="7"></textarea>
+        </div>
+        <button type="submit" class="btn btn-default">Сохранить</button>
+    </form>
+</div>
