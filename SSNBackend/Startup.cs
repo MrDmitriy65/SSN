@@ -62,6 +62,7 @@ namespace SSNBackend
 
             app.UseDeveloperExceptionPage();
             app.UseIdentity();
+            app.UseStaticFiles();
             app.UseMvc(routes =>
                 routes.MapRoute(
                     name: "",

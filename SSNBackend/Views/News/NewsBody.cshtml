@@ -1,0 +1,16 @@
+﻿@model News
+<div class="well">
+
+    <h3>
+        <strong>@Model.Header</strong>
+    </h3>
+    <p>
+        <form asp-action="DeleteNews" method="post">
+            <a asp-action="EditNews" asp-route-modelId="@Model.Id" class="btn btn-primary btn-xs">Редактировать</a>
+            <input name="newsId" type="hidden" value="@Model.Id"/>
+            <button type="submit" class="btn btn-danger btn-xs">Удалить</button>
+        </form>
+    </p>
+    <h5>@Model.Subheader</h5>
+    <span class="lead">@Model.Body</span>
+</div>

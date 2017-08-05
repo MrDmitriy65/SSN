@@ -4,32 +4,11 @@
     ViewBag.Title = "Все новости";
     Layout = "_MainLayout";
 }
-
-<h2>title</h2>
-
-<table>
-    <thead>
-    <th>Id</th>
-    <th>Head</th>
-    <th>Subhead</th>
-    <th>Body</th>
-    </thead>
-    @foreach (var news in Model)
-    {
-        <tr>
-            <td>@news.Header</td>
-            <td>@news.Subheader</td>
-            <td>@news.Body</td>
-            <td>
-                <a asp-action="EditNews" asp-route-modelId="@news.Id">Редактировать</a>
-            </td>
-            <td>
-                <form asp-action="DeleteNews" method="post">
-                    <input name="newsId" type="hidden" value="@news.Id"/>
-                    <button type="submit">Удалить</button>
-                </form>
-            </td>
-        </tr>
-    }
-</table>
+<div class="col-md-8 col-lg-offset-2">
+    
+@foreach (var news in Model)
+{
+    @Html.Partial("NewsBody", news)
+}
 <a asp-action="AddNews">Добавить новость</a>
+</div>
